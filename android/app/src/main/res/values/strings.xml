@@ -1323,4 +1323,7 @@
     <string name="search_cat_work">Work</string>
     <string name="search_cat_relax">Relax</string>
     <string name="search_cat_night">Night</string>
+    <string name="settings_general_theme_style">Theme style</string>
+    <string name="settings_theme_style_default">Default</string>
+    <string name="settings_theme_style_miku">Miku</string>
 </resources>

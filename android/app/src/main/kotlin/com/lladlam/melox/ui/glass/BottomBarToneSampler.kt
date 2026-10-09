@@ -28,8 +28,7 @@ import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
-import com.lladlam.melox.ui.theme.DarkColors
-import com.lladlam.melox.ui.theme.LightColors
+import com.lladlam.melox.ui.theme.meloXColorScheme
 import kotlin.coroutines.resume
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -316,7 +315,7 @@ internal fun BottomBarToneTheme(
     content: @Composable () -> Unit,
 ) {
     MaterialTheme(
-        colorScheme = lerpColorScheme(LightColors, DarkColors, darkness),
+        colorScheme = lerpColorScheme(meloXColorScheme(false), meloXColorScheme(true), darkness),
         typography = MaterialTheme.typography,
         shapes = MaterialTheme.shapes,
         content = content,

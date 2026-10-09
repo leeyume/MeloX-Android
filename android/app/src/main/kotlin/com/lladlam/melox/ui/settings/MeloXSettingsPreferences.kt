@@ -8,6 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import com.lladlam.melox.playback.MeloXPlaybackModePreferences
 
 enum class MeloXThemeMode { System, Light, Dark }
+enum class MeloXThemeStyle { Default, Miku }
 enum class MeloXSwipeFullAction { PlayNext, AddToQueue }
 enum class MeloXLyricAnnotationDisplayMode { FocusedLine, AllLines }
 enum class MeloXLyricsStyle { AppleMusic, Eva, TextPV }
@@ -46,6 +47,8 @@ enum class MeloXLyricsFontWeight(val composeWeight: FontWeight) {
 /** Process-visible settings used by UI paths that need immediate recomposition. */
 object MeloXSettingsRuntime {
     var performanceOverlayEnabled by mutableStateOf(false)
+        internal set
+    var themeStyle by mutableStateOf(MeloXThemeStyle.Default)
         internal set
     var themeMode by mutableStateOf(MeloXThemeMode.System)
         internal set
@@ -360,6 +363,9 @@ object MeloXSettingsRuntime {
         themeMode = runCatching {
             MeloXThemeMode.valueOf(MeloXSettingsPreferences.string(app, "theme_mode", MeloXThemeMode.System.name))
         }.getOrDefault(MeloXThemeMode.System)
+        themeStyle = runCatching {
+            MeloXThemeStyle.valueOf(MeloXSettingsPreferences.string(app, "theme_style", MeloXThemeStyle.Default.name))
+        }.getOrDefault(MeloXThemeStyle.Default)
         homeTabEnabled = MeloXSettingsPreferences.boolean(app, "tab_home", true)
         exploreTabEnabled = MeloXSettingsPreferences.boolean(app, "tab_explore", true)
         libraryTabEnabled = MeloXSettingsPreferences.boolean(app, "tab_library", true)
@@ -386,6 +392,9 @@ object MeloXSettingsRuntime {
         themeMode = runCatching {
             MeloXThemeMode.valueOf(MeloXSettingsPreferences.string(app, "theme_mode", MeloXThemeMode.System.name))
         }.getOrDefault(MeloXThemeMode.System)
+        themeStyle = runCatching {
+            MeloXThemeStyle.valueOf(MeloXSettingsPreferences.string(app, "theme_style", MeloXThemeStyle.Default.name))
+        }.getOrDefault(MeloXThemeStyle.Default)
         podcastsEnabled = MeloXSettingsPreferences.boolean(app, "feature_podcasts", true)
         listeningHistoryEnabled = MeloXSettingsPreferences.boolean(app, "feature_history", true)
         downloadsEnabled = MeloXSettingsPreferences.boolean(app, "feature_downloads", true)
@@ -810,6 +819,9 @@ object MeloXSettingsPreferences {
     fun setString(context: Context, key: String, value: String) {
         prefs(context).edit().putString(key, value).apply()
         when (key) {
+            "theme_style" -> MeloXSettingsRuntime.themeStyle = runCatching {
+                MeloXThemeStyle.valueOf(value)
+            }.getOrDefault(MeloXThemeStyle.Default)
             "theme_mode" -> MeloXSettingsRuntime.themeMode = runCatching {
                 MeloXThemeMode.valueOf(value)
             }.getOrDefault(MeloXThemeMode.System)

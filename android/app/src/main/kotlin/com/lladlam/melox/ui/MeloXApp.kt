@@ -1,5 +1,9 @@
 package com.lladlam.melox.ui
 
+import com.lladlam.melox.ui.theme.MikuPageBackdrop
+import com.lladlam.melox.ui.theme.MikuNavigationIcon
+import com.lladlam.melox.ui.settings.MeloXThemeStyle
+
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -499,7 +503,9 @@ fun MeloXApp(
               .fillMaxSize()
               .background(MaterialTheme.colorScheme.background)
               .layerBackdrop(pageBackdrop),
-      )
+      ) {
+          MikuPageBackdrop(selectedTab.name, Modifier.fillMaxSize())
+      }
       CompositionLocalProvider(LocalMeloXBackdrop provides pageBackdrop) {
         SharedTransitionLayout(modifier = Modifier.fillMaxSize()) {
             val sharedScope = this
@@ -517,7 +523,8 @@ fun MeloXApp(
                     .layerBackdrop(bottomChromeBackdrop)
                     .zIndex(if (libraryModalVisible && selectedTab == AppTab.Library && !fullPlayerVisible) 15f else 0f),
                 contentWindowInsets = WindowInsets(0, 0, 0, 0),
-                containerColor = MaterialTheme.colorScheme.background,
+                containerColor = if (MeloXSettingsRuntime.themeStyle == MeloXThemeStyle.Miku)
+                    Color.Transparent else MaterialTheme.colorScheme.background,
             ) { innerPadding ->
                 Box(
                     modifier = Modifier
@@ -1865,6 +1872,19 @@ private fun RootGlyphIcon(
     color: Color,
     selected: Boolean = false,
 ) {
+    if (MeloXSettingsRuntime.themeStyle == MeloXThemeStyle.Miku) {
+        val asset = when (glyph) {
+            RootGlyph.Home -> "home"
+            RootGlyph.Explore -> "explore"
+            RootGlyph.Library -> "library"
+            RootGlyph.Podcasts -> "podcasts"
+            RootGlyph.Downloads -> "downloads"
+            RootGlyph.Cloud -> "cloud"
+            RootGlyph.Settings -> "settings"
+            RootGlyph.Search -> null
+        }
+        if (asset != null && MikuNavigationIcon(asset, modifier)) return
+    }
     // The home tab uses the custom house vector (traced from the user's image)
     // instead of the tinted symbol glyph, so tint applies to it like the others.
     if (glyph == RootGlyph.Home) {

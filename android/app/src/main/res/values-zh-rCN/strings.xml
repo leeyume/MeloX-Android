@@ -1323,4 +1323,7 @@
     <string name="search_cat_work">工作</string>
     <string name="search_cat_relax">放松</string>
     <string name="search_cat_night">夜晚</string>
+    <string name="settings_general_theme_style">主题风格</string>
+    <string name="settings_theme_style_default">默认</string>
+    <string name="settings_theme_style_miku">初音未来</string>
 </resources>

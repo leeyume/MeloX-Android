@@ -485,14 +485,27 @@ private fun SettingsAccountCard(
 
 @Composable
 private fun SettingsSectionCard(section: SettingsSection, onOpen: (SettingsRoute) -> Unit) {
-    val accent = com.lladlam.melox.ui.glass.MeloXSystemColors.Red
+    val accent = if (MeloXSettingsRuntime.themeStyle == MeloXThemeStyle.Miku) MaterialTheme.colorScheme.primary
+        else com.lladlam.melox.ui.glass.MeloXSystemColors.Red
     MeloXIosGroupedList(surfaceColor = MaterialTheme.colorScheme.surface) {
         section.items.forEach { item ->
             MeloXIosListRow(
                 title = stringResource(item.route.titleRes),
                 leading = {
                     Box(Modifier.size(28.dp), contentAlignment = Alignment.Center) {
-                        MeloXActionIcon(item.symbol, Modifier.size(22.dp), accent)
+                        val asset = when (item.route) {
+                            SettingsRoute.General -> "settings/01_general"
+                            SettingsRoute.Playback, SettingsRoute.SystemPlayback -> "settings/02_playback"
+                            SettingsRoute.PlayerAppearance, SettingsRoute.TabLayout -> "settings/06_appearance"
+                            SettingsRoute.Lyrics, SettingsRoute.SkylineLyrics, SettingsRoute.FloatingLyrics -> "settings/07_desktop_lyrics"
+                            SettingsRoute.Storage -> "settings/04_cache"
+                            SettingsRoute.Developer, SettingsRoute.Experimental -> "settings/05_performance"
+                            SettingsRoute.About, SettingsRoute.Legal -> "settings/09_about"
+                            else -> null
+                        }
+                        if (asset == null || !com.lladlam.melox.ui.theme.MikuNavigationIcon(asset, Modifier.size(28.dp))) {
+                            MeloXActionIcon(item.symbol, Modifier.size(22.dp), accent)
+                        }
                     }
                 },
                 chevronTint = accent,
@@ -513,6 +526,11 @@ private fun SettingsDetailScreen(route: SettingsRoute, source: MusicSource, sess
     ) {
         item(key = "settings-detail:${route.name}") {
             Column {
+                when (route) {
+                    SettingsRoute.General -> com.lladlam.melox.ui.theme.MikuStateArtwork("peek", Modifier.size(72.dp))
+                    SettingsRoute.Playback -> com.lladlam.melox.ui.theme.MikuStateArtwork("listening", Modifier.size(72.dp))
+                    else -> Unit
+                }
                 when (route) {
                     SettingsRoute.Playback -> PlaybackSettings(context)
                     SettingsRoute.PlayerAppearance -> PlayerAppearanceSettings(context)
@@ -2677,6 +2695,7 @@ private fun TabLayoutSettings(context: android.content.Context) {
 @Composable
 private fun GeneralSettings(context: android.content.Context) {
     var theme by remember { mutableStateOf(MeloXSettingsRuntime.themeMode) }
+    val themeStyle = MeloXSettingsRuntime.themeStyle
     var swipeFullAction by remember { mutableStateOf(MeloXSettingsRuntime.swipeFullAction) }
     SettingsGlassGroup {
         MeloXSettingsDropdown(
@@ -2688,6 +2707,16 @@ private fun GeneralSettings(context: android.content.Context) {
                 MeloXThemeMode.Dark to stringResource(R.string.settings_general_theme_dark),
             ),
             onSelected = { theme = it; MeloXSettingsPreferences.setString(context, "theme_mode", it.name) },
+            grouped = true,
+        )
+        MeloXSettingsDropdown(
+            title = stringResource(R.string.settings_general_theme_style),
+            selected = themeStyle,
+            items = listOf(
+                MeloXThemeStyle.Default to stringResource(R.string.settings_theme_style_default),
+                MeloXThemeStyle.Miku to stringResource(R.string.settings_theme_style_miku),
+            ),
+            onSelected = { MeloXSettingsPreferences.setString(context, "theme_style", it.name) },
             grouped = true,
         )
         var defaultTab by remember { mutableStateOf(MeloXSettingsRuntime.defaultTab) }

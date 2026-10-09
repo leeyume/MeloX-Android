@@ -109,7 +109,7 @@ fun MeloXTheme(
     }
     CompositionLocalProvider(LocalMeloXFontFamily provides fontFamily) {
         MaterialTheme(
-            colorScheme = if (darkTheme) DarkColors else LightColors,
+            colorScheme = meloXColorScheme(darkTheme),
             typography = MeloXTypography.copyWithFamily(fontFamily),
             shapes = MeloXShapes,
         ) {

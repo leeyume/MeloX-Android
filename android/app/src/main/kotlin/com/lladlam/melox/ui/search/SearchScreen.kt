@@ -1636,14 +1636,26 @@ private fun SearchPlayButton(title: String, onClick: () -> Unit) {
 @Composable
 private fun SearchEmpty(message: String) {
     Box(Modifier.fillMaxSize().padding(28.dp), contentAlignment = Alignment.Center) {
-        Text(message, color = MaterialTheme.colorScheme.onSurface.copy(alpha = .5f))
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            if (message == stringResource(R.string.search_no_results) ||
+                message == stringResource(R.string.search_no_songs)) {
+                com.lladlam.melox.ui.theme.MikuStateArtwork("thinking", Modifier.size(112.dp))
+            }
+            Text(message, color = MaterialTheme.colorScheme.onSurface.copy(alpha = .5f))
+        }
     }
 }
 
 @Composable
 private fun SearchEmptyInline(message: String) {
     Box(Modifier.fillMaxWidth().padding(28.dp), contentAlignment = Alignment.Center) {
-        Text(message, color = MaterialTheme.colorScheme.onSurface.copy(alpha = .5f))
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            if (message == stringResource(R.string.search_no_results) ||
+                message == stringResource(R.string.search_no_songs)) {
+                com.lladlam.melox.ui.theme.MikuStateArtwork("thinking", Modifier.size(112.dp))
+            }
+            Text(message, color = MaterialTheme.colorScheme.onSurface.copy(alpha = .5f))
+        }
     }
 }
 

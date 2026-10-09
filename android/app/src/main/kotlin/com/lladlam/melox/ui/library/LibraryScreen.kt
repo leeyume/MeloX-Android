@@ -471,7 +471,9 @@ fun LibraryScreen(
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.background)
+                        .background(if (com.lladlam.melox.ui.settings.MeloXSettingsRuntime.themeStyle ==
+                            com.lladlam.melox.ui.settings.MeloXThemeStyle.Miku) Color.Transparent
+                            else MaterialTheme.colorScheme.background)
                         .statusBarsPadding()
                         .padding(horizontal = if (window.supportsTwoPane) window.gutter else 0.dp),
                 ) {
@@ -1279,11 +1281,14 @@ private fun MeloXLibrarySongsPage(
 ) {
     if (songs.isEmpty()) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+          Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            com.lladlam.melox.ui.theme.MikuStateArtwork("empty", Modifier.size(112.dp))
             Text(
                 stringResource(R.string.library_no_songs),
                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.48f),
                 fontSize = 17.sp,
             )
+          }
         }
         return
     }
