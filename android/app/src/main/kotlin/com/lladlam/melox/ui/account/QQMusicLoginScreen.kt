@@ -1,5 +1,7 @@
 package com.lladlam.melox.ui.account
 
+import com.lladlam.melox.ui.theme.mikuPageSurface
+
 import android.Manifest
 import android.content.ContentValues
 import android.content.Context
@@ -204,7 +206,7 @@ fun QQMusicLoginScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+            .mikuPageSurface("account")
             .statusBarsPadding(),
     ) {
         MeloXIosTopBar(

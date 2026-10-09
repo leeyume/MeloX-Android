@@ -1,5 +1,7 @@
 package com.lladlam.melox.ui.account
 
+import com.lladlam.melox.ui.theme.mikuPageSurface
+
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -44,7 +46,7 @@ fun SpotifyLoginScreen(onDismiss: () -> Unit, onLoggedIn: () -> Unit) {
     if (!MeloXRemoteConfigPolicy.capabilityEnabled(context, "spotify_oauth")) {
         BackHandler(onBack = onDismiss)
         Column(
-            Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)
+            Modifier.fillMaxSize().mikuPageSurface("account")
                 .statusBarsPadding().padding(horizontal = 20.dp, vertical = 14.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
@@ -68,7 +70,7 @@ fun SpotifyLoginScreen(onDismiss: () -> Unit, onLoggedIn: () -> Unit) {
     BackHandler(onBack = onDismiss)
 
     Column(
-        Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)
+        Modifier.fillMaxSize().mikuPageSurface("account")
             .statusBarsPadding().padding(horizontal = 20.dp, vertical = 14.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp),
     ) {

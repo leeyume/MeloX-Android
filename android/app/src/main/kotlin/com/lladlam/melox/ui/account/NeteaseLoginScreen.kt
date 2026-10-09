@@ -1,5 +1,7 @@
 package com.lladlam.melox.ui.account
 
+import com.lladlam.melox.ui.theme.mikuPageSurface
+
 import android.annotation.SuppressLint
 import android.webkit.CookieManager
 import android.webkit.WebChromeClient
@@ -152,7 +154,7 @@ fun NeteaseLoginScreen(
     } else Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+            .mikuPageSurface("account")
             .statusBarsPadding(),
     ) {
         Row(

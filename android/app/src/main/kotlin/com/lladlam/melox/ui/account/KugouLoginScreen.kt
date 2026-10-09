@@ -1,5 +1,7 @@
 package com.lladlam.melox.ui.account
 
+import com.lladlam.melox.ui.theme.mikuPageSurface
+
 import android.graphics.Bitmap
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
@@ -112,7 +114,7 @@ fun KugouLoginScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+            .mikuPageSurface("account")
             .statusBarsPadding(),
     ) {
         Row(

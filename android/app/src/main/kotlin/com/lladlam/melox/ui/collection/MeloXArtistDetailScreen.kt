@@ -1,5 +1,7 @@
 package com.lladlam.melox.ui.collection
 
+import com.lladlam.melox.ui.theme.mikuPageSurface
+
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.PredictiveBackHandler
 import kotlinx.coroutines.CancellationException
@@ -348,7 +350,7 @@ internal fun MeloXArtistDetailScreen(id: Long, onBack: () -> Unit) {
                 Modifier
                     .fillMaxSize()
                     .zIndex(10f)
-                    .background(MaterialTheme.colorScheme.background)
+                    .mikuPageSurface("collection")
                     .clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) {}
                     .graphicsLayer {
                         translationX = size.width * expandedSectionBackProgress.value
@@ -398,7 +400,7 @@ internal fun MeloXArtistDetailScreen(id: Long, onBack: () -> Unit) {
                 Modifier
                     .fillMaxSize()
                     .zIndex(20f)
-                    .background(MaterialTheme.colorScheme.background)
+                    .mikuPageSurface("collection")
                     .graphicsLayer {
                         translationX = size.width * selectedAlbumBackProgress.value
                         val scale = 1f - 0.08f * selectedAlbumBackProgress.value

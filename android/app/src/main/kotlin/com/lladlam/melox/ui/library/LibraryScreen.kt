@@ -1,5 +1,7 @@
 package com.lladlam.melox.ui.library
 
+import com.lladlam.melox.ui.theme.mikuPageSurface
+
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
@@ -1104,7 +1106,7 @@ private fun MeloXLibraryLoginUnavailable(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+            .mikuPageSurface("library")
             .statusBarsPadding()
             .padding(horizontal = 20.dp),
     ) {
@@ -1501,7 +1503,7 @@ private fun MeloXProviderArtistDetailScreen(
     Column(
         Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+            .mikuPageSurface("library")
             .statusBarsPadding(),
     ) {
         Row(
@@ -1697,7 +1699,7 @@ private fun MeloXLibraryPlaylistsPage(
 private fun LocalRecommendationPlaylistScreen(onBack: () -> Unit) {
     val context = LocalContext.current.applicationContext
     val tracks = LocalRecommendationStore.readRecommendedTracks(context)
-    Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).statusBarsPadding()) {
+    Column(Modifier.fillMaxSize().mikuPageSurface("library").statusBarsPadding()) {
         MeloXPlaylistToolbar(
             foreground = MaterialTheme.colorScheme.onBackground,
             onBack = onBack,

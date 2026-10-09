@@ -1,5 +1,7 @@
 package com.lladlam.melox.ui.search
 
+import com.lladlam.melox.ui.theme.mikuPageSurface
+
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.PredictiveBackHandler
 import androidx.compose.animation.AnimatedVisibility
@@ -771,7 +773,7 @@ fun SearchScreen(
             exit = meloXPageExit(toRight = true),
             modifier = Modifier.fillMaxSize().zIndex(1f),
         ) {
-            Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+            Box(Modifier.fillMaxSize().mikuPageSurface("search")) {
             when (val page = subPageContent) {
                 SearchSubPage.Podcast -> MeloXPodcastScreen()
                 is SearchSubPage.Category -> SearchCategoryPage(

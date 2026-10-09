@@ -1,5 +1,7 @@
 package com.lladlam.melox.ui.player
 
+import com.lladlam.melox.ui.theme.mikuPageSurface
+
 import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -67,7 +69,7 @@ internal fun MeloXLyricShareDialog(
     ) {
         Column(
             Modifier.fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
+                .mikuPageSurface("player")
                 .statusBarsPadding()
                 .navigationBarsPadding(),
         ) {

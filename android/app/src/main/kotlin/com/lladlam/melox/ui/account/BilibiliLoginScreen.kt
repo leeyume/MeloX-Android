@@ -1,5 +1,7 @@
 package com.lladlam.melox.ui.account
 
+import com.lladlam.melox.ui.theme.mikuPageSurface
+
 import android.annotation.SuppressLint
 import android.webkit.CookieManager
 import android.webkit.WebChromeClient
@@ -45,7 +47,7 @@ fun BilibiliLoginScreen(onDismiss: () -> Unit, onLoggedIn: () -> Unit) {
         }
     }
     DisposableEffect(Unit) { onDispose { webView?.stopLoading(); webView?.destroy() } }
-    Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).statusBarsPadding()) {
+    Column(Modifier.fillMaxSize().mikuPageSurface("account").statusBarsPadding()) {
         Row(Modifier.fillMaxWidth().padding(18.dp, 12.dp), Arrangement.SpaceBetween, Alignment.CenterVertically) {
             Text(stringResource(R.string.action_cancel), Modifier.clickable(onClick = onDismiss).padding(8.dp), color = MaterialTheme.colorScheme.primary)
             Text(stringResource(R.string.account_login_bilibili), style = MaterialTheme.typography.titleMedium)

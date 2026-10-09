@@ -1,5 +1,7 @@
 package com.lladlam.melox.ui.messages
 
+import com.lladlam.melox.ui.theme.mikuPageSurface
+
 import android.content.Context
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -144,7 +146,7 @@ private fun MessagesConversationList(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+            .mikuPageSurface("messages")
             .statusBarsPadding(),
     ) {
         Column(Modifier.fillMaxSize()) {
@@ -296,7 +298,7 @@ private fun MessageContactsScreen(
     Column(
         Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+            .mikuPageSurface("messages")
             .statusBarsPadding()
             .padding(horizontal = 16.dp),
     ) {
@@ -482,7 +484,7 @@ private fun MessagesDetailScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+            .mikuPageSurface("messages")
             .statusBarsPadding(),
     ) {
         Column(Modifier.fillMaxSize()) {
